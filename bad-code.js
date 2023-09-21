@@ -3,6 +3,15 @@ function createObjectWrite() {
     return `(function(){${assignment}})` // NOT OK
 }
 
+var express = require('express');
+
+var app = express();
+app.get('/remember-password', function (req, res) {
+  let pw = req.param("current_password");
+  // BAD: Setting a cookie value with cleartext sensitive data.
+  res.cookie("password", pw);
+});
+
 (function x(){"use strict"; x = 1;}()); // TypeError
 (function x(){x = 1; return x !== 1;}()); // write fails silently; function returns true
 
